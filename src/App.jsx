@@ -1,35 +1,80 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
+import { useState, useEffect } from "react";
+import Description from "./components/Description/Description";
+import Options from "./components/Options/Options";
+import Feedback from "./components/Feedback/Feedback";
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+  const [reviews, setReview] = useState(() => {
+    // Check for PreviousData in LS
+    const savedObject = window.localStorage.getItem("previousData");
+    if (savedObject !== null) {
+      return JSON.parse(savedObject);
+    }
+    // If no data use zeroes
+    return {
+      good: 0,
+      neutral: 0,
+      bad: 0,
+    };
+  });
+
+  if (
+    JSON.parse(window.localStorage.getItem("previousData")).totalFeedback !==
+    null
+  ) {
+    const savedData = JSON.parse(window.localStorage.getItem("previousData"));
+  }
+
+  let totalFeedback = reviews.good + reviews.neutral + reviews.bad;
+  let positiveRate = Math.round((reviews.good / totalFeedback) * 100);
+
+  const updateFeedback = ({ target }) => {
+    const feedbackType = target.name;
+    return setReview({
+      ...reviews,
+      [feedbackType]: reviews[feedbackType] + 1,
+    });
+  };
+
+  const resetFeedback = () => {
+    return setReview({
+      good: 0,
+      neutral: 0,
+      bad: 0,
+    });
+  };
+
+  useEffect(() => {
+    window.localStorage.setItem("previousData", JSON.stringify(reviews));
+  }, [reviews]);
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className="cardTop">
+        <Description></Description>
+        <Options
+          // name={updateFeedback}
+          onClick={updateFeedback}
+          totalCount={totalFeedback}
+          onReset={resetFeedback}
+        ></Options>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+      <div className="cardBottom">
+        {totalFeedback ? (
+          <Feedback
+            good={reviews.good}
+            neutral={reviews.neutral}
+            bad={reviews.bad}
+            total={totalFeedback}
+            positive={positiveRate}
+          ></Feedback>
+        ) : (
+          "No feedback yet"
+        )}
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;

@@ -1,0 +1,53 @@
+.optionsWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.rateWrapper {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.resetWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.btnRate {
+  justify-content: center;
+  flex-grow: 1;
+  height: 52px;
+}
+
+.btnReset {
+  background-color: transparent;
+  border: 1px solid #dfdfdf;
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  color: #272727;
+  pointer-events: none;
+}
+
+.iconNeutral {
+  composes: icon;
+  color: #272727;
+}
+
+.iconGood {
+  composes: icon;
+  color: #0e9241;
+}
+
+.iconBad {
+  composes: icon;
+  color: #972626;
+}
