@@ -19,15 +19,8 @@ const App = () => {
     };
   });
 
-  if (
-    JSON.parse(window.localStorage.getItem("previousData")).totalFeedback !==
-    null
-  ) {
-    const savedData = JSON.parse(window.localStorage.getItem("previousData"));
-  }
-
-  let totalFeedback = reviews.good + reviews.neutral + reviews.bad;
-  let positiveRate = Math.round((reviews.good / totalFeedback) * 100);
+  const totalFeedback = reviews.good + reviews.neutral + reviews.bad;
+  const positiveRate = Math.round((reviews.good / totalFeedback) * 100);
 
   const updateFeedback = ({ target }) => {
     const feedbackType = target.name;
