@@ -46,13 +46,13 @@ const App = () => {
   return (
     <>
       <div className="cardTop">
-        <Description></Description>
+        <Description />
         <Options
           // name={updateFeedback}
           onClick={updateFeedback}
           totalCount={totalFeedback}
           onReset={resetFeedback}
-        ></Options>
+        />
       </div>
       <div className="cardBottom">
         {totalFeedback ? (
@@ -62,9 +62,9 @@ const App = () => {
             bad={reviews.bad}
             total={totalFeedback}
             positive={positiveRate}
-          ></Feedback>
+          />
         ) : (
-          <Notification></Notification>
+          <Notification />
         )}
       </div>
     </>
