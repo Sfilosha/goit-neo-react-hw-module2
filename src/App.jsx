@@ -23,12 +23,11 @@ const App = () => {
   const totalFeedback = reviews.good + reviews.neutral + reviews.bad;
   const positiveRate = Math.round((reviews.good / totalFeedback) * 100);
 
-  const updateFeedback = ({ target }) => {
-    const feedbackType = target.name;
-    return setReview({
-      ...reviews,
-      [feedbackType]: reviews[feedbackType] + 1,
-    });
+  const updateFeedback = (feedbackType) => {
+    setReview((prevReviews) => ({
+      ...prevReviews,
+      [feedbackType]: prevReviews[feedbackType] + 1,
+    }));
   };
 
   const resetFeedback = () => {
@@ -48,7 +47,6 @@ const App = () => {
       <div className="cardTop">
         <Description />
         <Options
-          // name={updateFeedback}
           onClick={updateFeedback}
           totalCount={totalFeedback}
           onReset={resetFeedback}

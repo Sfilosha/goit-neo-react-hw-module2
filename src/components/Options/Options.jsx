@@ -8,8 +8,7 @@ function Options({ onClick, totalCount, onReset }) {
         <button
           className={style.btnRate}
           type="button"
-          onClick={onClick}
-          name="good"
+          onClick={() => onClick("good")}
         >
           <AiOutlineSmile className={style.iconGood} />
           Good
@@ -17,8 +16,7 @@ function Options({ onClick, totalCount, onReset }) {
         <button
           className={style.btnRate}
           type="button"
-          onClick={onClick}
-          name="neutral"
+          onClick={() => onClick("neutral")}
         >
           <AiOutlineMeh className={style.iconNeutral} />
           Neutral
@@ -26,8 +24,7 @@ function Options({ onClick, totalCount, onReset }) {
         <button
           className={style.btnRate}
           type="button"
-          onClick={onClick}
-          name="bad"
+          onClick={() => onClick("bad")}
         >
           <AiOutlineFrown className={style.iconBad} />
           Bad
